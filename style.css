@@ -1,0 +1,30 @@
+#nav_demineur{
+	width: 100%;
+	background-position:0cm;
+	background-color: #2bd7d484;
+	border-width: 2px;
+	border-style: double;
+	height: 25px;
+	display: flex;
+    justify-content:flex-start;
+	
+}
+
+#body_demineur{
+	background-color: rgba(128, 128, 128, 0.544);
+	
+	margin: 0;
+	
+}
+
+#jeu{
+	display: flex;
+    justify-content: center;
+    /* border-width: 2px;
+	border-style: double; */
+}
+
+.item_nav{
+	margin-top: 3px;
+	padding-right: 10px;
+}

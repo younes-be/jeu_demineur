@@ -24,16 +24,13 @@
     border-width: 2px;
 	border-style: double; 
 	width: 49%;
+
 }
 
 .item_nav{
 	margin-top: 3px;
 	padding-right: 10px;
+
 }
-.vertical-line{
-	border-left: 4px solid #000;
-	display: inline-block;
-	height: 400px;
-	margin: 0 50% ;
-	padding-top: 0;
-  }
+
+

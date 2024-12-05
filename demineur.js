@@ -12,7 +12,6 @@ class Case {
     }
     
 }
-<<<<<<< HEAD
 function sleep(ms){
 	return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -20,16 +19,18 @@ async function chrono(){
 	let k=document.getElementById("temps").value;
 	const myButton = document.getElementById("fin_game");
 	let arret=0;
-
-	while(arret==!1) {
-	
-	await sleep(1000);
-	document.getElementById("temps").value=document.getElementById("temps").value*1+1;
 	myButton.addEventListener("click",() =>{arret=1;})
+	
+	while(arret==!1) {
+	await sleep(1000);
+	if (arret==!1){
+	document.getElementById("temps").value=document.getElementById("temps").value*1+1;
+	
+}
 }
 }
 async function reset(){
-	await sleep(500);
+	
 	document.getElementById("temps").value=0;
 
 }
@@ -42,8 +43,7 @@ function Cookies() {
 	Cookies();
 	}
 	}
-Cookies();
-=======
+//Cookies();
 
 let grille = [];
 
@@ -63,4 +63,3 @@ function creerGrille(haut, larg) {
     
 }
 
->>>>>>> c1749f127de61663f2681184e2809c5310ee00a5

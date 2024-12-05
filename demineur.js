@@ -4,9 +4,15 @@ class Case {
 	this.posy = y;
 	this.isMine = false;
 	this.number = 0;
+	this.hidden = true;
     }
 
+    get imageName() {
+	return this.getImageName();
+    }
+    
 }
+<<<<<<< HEAD
 function sleep(ms){
 	return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -37,3 +43,24 @@ function Cookies() {
 	}
 	}
 Cookies();
+=======
+
+let grille = [];
+
+function creerGrille(haut, larg) {
+    grille.length = haut;
+    let i = 0;
+    let j = 0;
+    while (i < haut) {
+	grille[i] = Array(larg);
+	j = 0;
+	while (j<larg) {
+	    grille[i][j] = new Case(j, i);
+	    j = j + 1 ;
+	}
+	i = i + 1;
+    }
+    
+}
+
+>>>>>>> c1749f127de61663f2681184e2809c5310ee00a5

@@ -1,6 +1,6 @@
 #nav_demineur{
 	width: 100%;
-	background-position:0cm;
+	
 	background-color: #2bd7d484;
 	border-width: 2px;
 	border-style: double;
@@ -18,10 +18,13 @@
 }
 
 #jeu{
+	
 	display: flex;
-    justify-content: center;
-    /* border-width: 2px;
-	border-style: double; */
+    justify-content: left;
+    border-width: 2px;
+	border-style: double; 
+	width: 49%;
+
 }
 
 #grille{

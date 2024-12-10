@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Démineur</title>
     <link rel="stylesheet" href="style.css">
+    
     <script type="text/javascript" src="demineur.js"></script>
+
 </head>
 <body id="body_demineur">
 
@@ -16,19 +18,26 @@
     <div class="item_nav">
         <a href="https://demineur.nhtdev.com/fr/rules">Help</a>  
     </div>
+    
     <div class="item_nav">    
     Temps:
-</div> 
+    <input id="temps" type="number" value="000" disabled>
+    </div> 
+
 <div class="item_nav">  
         Mines restantes:10
     </div>
     </nav>   
 
+
     <div id="jeu">
+      <button id="debut_game" onclick="chrono()">GO!</button>
+      <button id="fin_game" onclick="reset()">CIAO</button>
       <div id="grille">
 	<script type="text/javascript">grilleButtons(7,7);</script>
       </div>
     </div>
+
 
 
 </body>

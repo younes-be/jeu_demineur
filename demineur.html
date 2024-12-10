@@ -4,15 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Démineur</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="demineur.js"></script> 
 </head>
-<body>
-<div id="div_nav_demineur">
+<body id="body_demineur">
+
     <nav id="nav_demineur"> 
+        <div class="item_nav">
         <a href="main.html">Home</a> 
+    </div>
+    <div class="item_nav">
         <a href="https://demineur.nhtdev.com/fr/rules">Help</a>  
-        Temps:   
+    </div>
+    
+    <div class="item_nav">    
+    Temps:
+    <input id="temps" type="number" value="000" disabled>
+    </div> 
+
+<div class="item_nav">  
         Mines restantes:10
+    </div>
     </nav>   
-</div>
+
+    <div id="jeu">ICI se retourve le jeu</div>
+<button id="debut_game" onclick="chrono()">GO!</button>
+<button id="fin_game" onclick="reset()">CIAO</button>
+
+
+
 </body>
 </html>

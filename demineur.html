@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Démineur</title>
     <link rel="stylesheet" href="style.css">
-    <script src="demineur.js"></script> 
+    <script src="demineur.js" defer></script> 
 </head>
 <body id="body_demineur">
 
@@ -32,6 +32,14 @@
 <button id="fin_game" onclick="reset()">CIAO</button>
 
 
-
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <h2>Bonjour !</h2>
+        <p>Voulez vous des cookies?</p>
+        
+        <button id="refuse-button">non :(</button>
+        <button id="accept-button">Avec Plaisir!</button>
+    </div>
+</div>
 </body>
 </html>

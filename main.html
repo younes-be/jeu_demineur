@@ -1,1 +1,31 @@
-<html></html>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    
+    <title>Démineur - Accueil</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="logo.png" alt="Logo du Démineur" class="logo">
+            <h1>Bienvenue dans le Monde du Démineur !</h1>
+        </header>
+        <main>
+            <p>Préparez-vous à une expérience de jeu inoubliable ! Cliquez sur le bouton ci-dessous pour commencer votre aventure.</p>
+            <img src="welcome-image.png" alt="Image de bienvenue" class="welcome-image">
+            <button id="play-button">JOUER</button>
+        </main>
+        <footer>
+            <p>&copy; 2024 Démineur. Tous droits réservés.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById('play-button').addEventListener('click', () => {
+            window.location.href = 'game.html';
+        });
+    </script>
+</body>
+</html>

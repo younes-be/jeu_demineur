@@ -1,2 +1,2 @@
 younes:  pop up cookie  animation pop up
-
+raph : finir de faire marcher la grille, lier la grille à l'affichage des mines, faire la logique du jeu

@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Démineur</title>
     <link rel="stylesheet" href="style.css">
-    <script src="demineur.js" defer></script> 
+    
+    <script type="text/javascript" src="demineur.js" defer></script>
+
 </head>
 <body id="body_demineur">
 
@@ -27,9 +29,14 @@
     </div>
     </nav>   
 
-    <div id="jeu">ICI se retourve le jeu</div>
-<button id="debut_game" onclick="chrono()">GO!</button>
-<button id="fin_game" onclick="reset()">CIAO</button>
+
+    <div id="jeu">
+      <button id="debut_game" onclick="chrono()">GO!</button>
+      <button id="fin_game" onclick="reset()">CIAO</button>
+      <div id="grille">
+	<script type="text/javascript">grilleButtons(7,7);</script>
+      </div>
+    </div>
 
 
 <div id="popup" class="popup">

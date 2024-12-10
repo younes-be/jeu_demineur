@@ -27,12 +27,18 @@
 
 }
 
+#grille{
+    display : grid;
+    grid-template-columns : 50px 50px 50px 50px 50px 50px 50px;
+    grid-template-rows : 50px 50px 50px 50px 50px 50px 50px;
+}
+
 .item_nav{
 	margin-top: 3px;
 	padding-right: 10px;
-
 }
 
+<<<<<<< HEAD
 .popup {
     position: fixed;
     top: 0;
@@ -83,4 +89,10 @@
 
 #close-popup:hover {
     background-color: #0056b3;
+=======
+.button_case{
+    width : 50px;
+    height : 50px;
+    border : 0px;
+>>>>>>> 2a2cf84cf311b49f5c290c8502b43f35efa7ec30
 }

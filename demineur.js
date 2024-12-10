@@ -7,27 +7,48 @@ class Case {
 	this.hidden = true;
     }
 
-    get imageName() {
-	return this.getImageName();
-    }
     
 }
 
+
 let grille = [];
+let hauteur = 7;
+let largeur = 7;
 
 function creerGrille(haut, larg) {
     grille.length = haut;
-    let i = 0;
-    let j = 0;
-    while (i < haut) {
+    for (var i=0;i<haut;i++) {
 	grille[i] = Array(larg);
-	j = 0;
-	while (j<larg) {
+	for (var j=0;j<larg;j++){
 	    grille[i][j] = new Case(j, i);
-	    j = j + 1 ;
 	}
-	i = i + 1;
     }
     
 }
+
+
+function changeImage(mouseEvent) {
+    mouseEvent.target.style.background="url('case_mine.png')" ;
+}
+
+
+function grilleButtons(haut, larg) {
+    const divGrille = document.getElementById("grille") ;
+    for (var i=0;i<haut;i++) {
+	for (var j=0;j<larg;j++){
+	    
+	    var newCase = document.createElement("BUTTON") ;
+	    newCase.style.gridrow=i.toString() ;
+	    newCase.classList.add("button_case") ;
+	    newCase.id = i.toString() + "_" + j.toString() ;
+	    newCase.style.background="url('case_vide.png')" ;
+	    newCase.addEventListener("click", changeImage);
+	    divGrille.appendChild(newCase) ;
+	    
+	}
+    }    
+    
+}
+
+
 

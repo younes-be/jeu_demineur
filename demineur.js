@@ -8,6 +8,18 @@ class Case {
     }
 
 }
+<<<<<<< HEAD
+=======
+//Fonction pour créer un cookie.
+function setCookie(name, value, days) {
+    const expires = new Date(Date.now() + days * 864e5).toUTCString();
+    document.cookie = `${name}=${value}; expires=${expires}; path=/`;
+}
+// Fonction pour lire un cookie
+function getCookie(name) {
+    return document.cookie.split('; ').find(row => row.startsWith(name + '='))?.split('=')[1];
+}
+>>>>>>> d322df708ea3bd0301a054980adc49db1c96d181
 
 function sleep(ms){
 	return new Promise(resolve => setTimeout(resolve, ms));
@@ -59,13 +71,37 @@ function creerGrille(haut, larg) {
 }
 
 
+
+
+function cookie(){
+	const popup = document.getElementById('popup');
+	const closePopupButton = document.getElementById('accept-button');
+	
+	// Fonction pour afficher la pop-up
+	
+	popup.classList.add('show');
+	
+	
+	// Fonction pour fermer la pop-up
+	closePopupButton.addEventListener('click', () => {
+		setCookie('cookiesAccepted', 'true', 1); // Stocke l'acceptation pendant 1 jour
+		popup.classList.remove('show');
+	});
+	
+}
+
+const cookieAccepted = getCookie('cookiesAccepted');
+
+if (!cookieAccepted){
+	cookie();
+}
+
+
 function selectImage(idCase) {
     const coords = idCase.split("_") ;
     const x = parseInt(coords[0]) ;
     const y = parseInt(coords[0]) ;
 }
-    
-
 
 function changeImage(mouseEvent) {
     if (!(mouseEvent.target.classList.contains("buttonFlagged"))) {

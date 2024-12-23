@@ -7,8 +7,8 @@ class Case {
 	this.hidden = true;
     }
 
-    
 }
+
 function sleep(ms){
 	return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -59,28 +59,50 @@ function creerGrille(haut, larg) {
 }
 
 
+function selectImage(idCase) {
+    const coords = idCase.split("_") ;
+    const x = parseInt(coords[0]) ;
+    const y = parseInt(coords[0]) ;
+}
+    
+
+
 function changeImage(mouseEvent) {
-    mouseEvent.target.style.background="url('case_mine.png')" ;
+    if (!(mouseEvent.target.classList.contains("buttonFlagged"))) {
+	mouseEvent.target.style.background="url('case_mine.png')" ;
+	mouseEvent.target.classList.add("buttonRevealed") ;
+    }
 }
 
+
+function changeImageFlag(rightClick) {
+    
+    rightClick.preventDefault() ;
+    if (rightClick.target.classList.contains("buttonRevealed")) {
+	return 0 ;
+    } else if (rightClick.target.classList.contains("buttonFlagged")) {
+	rightClick.target.style.background="url('case_vide.png')" ;
+	rightClick.target.classList.remove("buttonFlagged") ;
+    } else {
+	rightClick.target.style.background="url('case_flag.png')" ;
+	rightClick.target.classList.add("buttonFlagged") ;
+    }
+}
 
 function grilleButtons(haut, larg) {
     const divGrille = document.getElementById("grille") ;
     for (var i=0;i<haut;i++) {
 	for (var j=0;j<larg;j++){
-	    
 	    var newCase = document.createElement("BUTTON") ;
 	    newCase.style.gridrow=i.toString() ;
 	    newCase.classList.add("button_case") ;
 	    newCase.id = i.toString() + "_" + j.toString() ;
 	    newCase.style.background="url('case_vide.png')" ;
 	    newCase.addEventListener("click", changeImage);
+	    newCase.addEventListener("contextmenu", changeImageFlag);
 	    divGrille.appendChild(newCase) ;
 	    
 	}
     }    
     
 }
-
-
-

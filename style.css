@@ -20,8 +20,8 @@
 #jeu{
 	
 	display: flex;
-    justify-content: left;
-    border-width: 2px;
+	justify-content: left;
+	border-width: 2px;
 	border-style: double; 
 	width: 49%;
 

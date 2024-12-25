@@ -38,7 +38,6 @@
 	padding-right: 10px;
 }
 
-<<<<<<< HEAD
 .popup {
     position: fixed;
     top: 0;
@@ -70,15 +69,7 @@
     width: 100%;
 }
 
-#accept-button {
-    background-color: #007BFF;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-#refuse-button {
+#accept-button, #refuse-button {
     background-color: #007BFF;
     color: #fff;
     border: none;
@@ -87,12 +78,8 @@
     cursor: pointer;
 }
 
-#close-popup:hover {
-    background-color: #0056b3;
-=======
-.button_case{
-    width : 50px;
-    height : 50px;
-    border : 0px;
->>>>>>> 2a2cf84cf311b49f5c290c8502b43f35efa7ec30
+
+#refuse-button:hover,#accept-button:hover {
+    background-color: #1ecfee;
+    
 }

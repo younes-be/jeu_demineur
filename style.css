@@ -11,7 +11,7 @@
 }
 
 #body_demineur{
-	background-color: rgba(128, 128, 128, 0.544);
+	background-color: #007BFF;
 	
 	margin: 0;
 	
@@ -24,6 +24,7 @@
 	border-width: 2px;
 	border-style: double; 
 	width: 49%;
+    background-color: #fff;
 
 }
 

@@ -75,7 +75,7 @@ function cookie(){
 	
 	// Fonction pour fermer la pop-up
 	close_popup_button.addEventListener('click', () => {
-		// setCookie('cookiesAccepted', 'true', 1); // Stocke l'acceptation pendant 1 jour
+		setCookie('cookiesAccepted', 'true', 1); // Stocke l'acceptation pendant 1 jour
 		popup.classList.remove('show');
 	});
 	

@@ -27,7 +27,10 @@
     background-color: #fff;
 
 }
-
+#grille {
+    display: grid;
+    gap: 1px; /* Ajout d'un écart entre les cases pour une meilleure visibilité */
+}
 .button_case{
     width : 50px;
     height : 50px;
@@ -89,3 +92,4 @@
     background-color: #1ecfee;
     
 }
+

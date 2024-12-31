@@ -1,7 +1,7 @@
 class Case_grille {
     constructor(x, y) {
 	this.posX = x;
-	this.posy = y;
+	this.posY = y;
 	this.isMine = false;
 	this.number = 0;
 	this.hidden = true;
@@ -20,36 +20,32 @@ let number_mines = 10 ;
 
 
 
-function creerGrille(haut, larg,mine_nb) {
-    
+function creerGrille(haut, larg, mine_nb) {
     grille.length = haut;
-    for (var i=0;i<haut;i++) {
-	grille[i] = Array(larg);
-	for (var j=0;j<larg;j++){
-	    grille[i][j] = 0;
-	}
+    for (var i = 0; i < haut; i++) {
+        grille[i] = Array(larg);
+        for (var j = 0; j < larg; j++) {
+            grille[i][j] = 0;
+        }
     }
-    
 
-    for (var k=0;k<mine_nb;k++) {
-	
-	let new_x = Math.floor(Math.random() * larg) ;
-	let new_y = Math.floor(Math.random() * haut) ;
-	
-	while (grille[new_y][new_x] == 9) {
-	    let new_x = Math.floor(Math.random() * larg) ;
-	    let new_y = Math.floor(Math.random() * haut) ;
-	}
-	
-	grille[new_y][new_x] = 9 ;
-	for (var m=Math.max(0,new_y-1);m<Math.min(haut,new_y+2);m++) {
-	    for (var n=Math.max(0,new_x-1);n<Math.min(larg,new_x+2);n++){
-		if (grille[m][n] != 9) {
-		    grille[m][n]++;
-		}
-	    }
-	} 
-	
+    for (var k = 0; k < mine_nb; k++) {
+        let new_x = Math.floor(Math.random() * larg);
+        let new_y = Math.floor(Math.random() * haut);
+
+        while (grille[new_y][new_x] == 9) {
+            new_x = Math.floor(Math.random() * larg);
+            new_y = Math.floor(Math.random() * haut);
+        }
+
+        grille[new_y][new_x] = 9;
+        for (var m = Math.max(0, new_y - 1); m < Math.min(haut, new_y + 2); m++) {
+            for (var n = Math.max(0, new_x - 1); n < Math.min(larg, new_x + 2); n++) {
+                if (grille[m][n] != 9) {
+                    grille[m][n]++;
+                }
+            }
+        }
     }
 }
 
@@ -134,12 +130,12 @@ function selectImage(idCase) {
     const coords = idCase.split("_") ;
     const x = parseInt(coords[0]) ;
     const y = parseInt(coords[1]) ;
-    return("url('case_" + grille[x][y].toString() + ".png')'") ;
+    return("url('case_" + grille[x][y].toString() + ".png')");
 }
 
 function changeImage(mouseEvent) {
     if (!(mouseEvent.target.classList.contains("buttonFlagged"))) {
-	mouseEvent.target.style.background= selectImage(this.id) ;
+	mouseEvent.target.style.background= selectImage(mouseEvent.target.id) ;
 	mouseEvent.target.classList.add("buttonRevealed") ;
     }
 }
@@ -175,8 +171,8 @@ function grilleButtons(haut, larg) {
     for (var i=0;i<haut;i++) {
 	for (var j=0;j<larg;j++){
 	    var newCase = document.createElement("BUTTON") ;
-	    newCase.style.gridRow=i.toString() ;
-	    newCase.style.gridColumn = j.toString() ;
+	    newCase.style.gridRow=(i+1).toString() ;
+	    newCase.style.gridColumn = (j+1).toString() ;
 	    newCase.classList.add("button_case") ;
 	    newCase.id = i.toString() + "_" + j.toString() ;
 	    newCase.style.background="url('case_vide.png')" ;

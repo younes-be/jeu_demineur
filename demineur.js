@@ -1,4 +1,4 @@
-class Case {
+class Case_grille {
     constructor(x, y) {
 	this.posX = x;
 	this.posy = y;
@@ -8,8 +8,52 @@ class Case {
     }
 
 }
-<<<<<<< HEAD
-=======
+
+
+
+let grille = [];
+let hauteur = 7;
+let largeur = 7;
+let number_mines = 10 ;
+
+
+
+
+
+function creerGrille(haut, larg,mine_nb) {
+    
+    grille.length = haut;
+    for (var i=0;i<haut;i++) {
+	grille[i] = Array(larg);
+	for (var j=0;j<larg;j++){
+	    grille[i][j] = 0;
+	}
+    }
+    
+
+    for (var k=0;k<mine_nb;k++) {
+	
+	let new_x = Math.floor(Math.random() * larg) ;
+	let new_y = Math.floor(Math.random() * haut) ;
+	
+	while (grille[new_y][new_x] == 9) {
+	    let new_x = Math.floor(Math.random() * larg) ;
+	    let new_y = Math.floor(Math.random() * haut) ;
+	}
+	
+	grille[new_y][new_x] = 9 ;
+	for (var m=Math.max(0,new_y-1);m<Math.min(haut,new_y+2);m++) {
+	    for (var n=Math.max(0,new_x-1);n<Math.min(larg,new_x+2);n++){
+		if (grille[m][n] != 9) {
+		    grille[m][n]++;
+		}
+	    }
+	} 
+	
+    }
+}
+
+
 //Fonction pour créer un cookie.
 function setCookie(name, value, days) {
     const expires = new Date(Date.now() + days * 864e5).toUTCString();
@@ -19,7 +63,7 @@ function setCookie(name, value, days) {
 function getCookie(name) {
     return document.cookie.split('; ').find(row => row.startsWith(name + '='))?.split('=')[1];
 }
->>>>>>> d322df708ea3bd0301a054980adc49db1c96d181
+
 
 function sleep(ms){
 	return new Promise(resolve => setTimeout(resolve, ms));
@@ -55,20 +99,6 @@ function Cookies() {
 //Cookies();
 
 
-let grille = [];
-let hauteur = 7;
-let largeur = 7;
-
-function creerGrille(haut, larg) {
-    grille.length = haut;
-    for (var i=0;i<haut;i++) {
-	grille[i] = Array(larg);
-	for (var j=0;j<larg;j++){
-	    grille[i][j] = new Case(j, i);
-	}
-    }
-    
-}
 
 
 
@@ -90,22 +120,23 @@ function cookie(){
 	
 }
 
+
 const cookieAccepted = getCookie('cookiesAccepted');
 
 if (!cookieAccepted){
 	cookie();
 }
 
-
 function selectImage(idCase) {
     const coords = idCase.split("_") ;
     const x = parseInt(coords[0]) ;
-    const y = parseInt(coords[0]) ;
+    const y = parseInt(coords[1]) ;
+    return("url('case_" + grille[x][y].toString() + ".png')'") ;
 }
 
 function changeImage(mouseEvent) {
     if (!(mouseEvent.target.classList.contains("buttonFlagged"))) {
-	mouseEvent.target.style.background="url('case_mine.png')" ;
+	mouseEvent.target.style.background= selectImage(this.id) ;
 	mouseEvent.target.classList.add("buttonRevealed") ;
     }
 }
@@ -126,11 +157,23 @@ function changeImageFlag(rightClick) {
 }
 
 function grilleButtons(haut, larg) {
-    const divGrille = document.getElementById("grille") ;
+    
+    const divJeu = document.getElementById("jeu") ;
+    var divGrille = document.createElement("DIV") ;
+    divGrille.id = "grille";
+    divGrille.style.display = "grid";
+    let taille = "50px " ;
+    let taille_cols = taille.repeat(larg) ;
+    let taille_rows = taille.repeat(haut) ;
+    divGrille.style.gridTemplateColumns = taille_cols ;
+    divGrille.style.gridTemplateRows = taille_rows ;
+    divJeu.appendChild(divGrille) ;
+
     for (var i=0;i<haut;i++) {
 	for (var j=0;j<larg;j++){
 	    var newCase = document.createElement("BUTTON") ;
-	    newCase.style.gridrow=i.toString() ;
+	    newCase.style.gridRow=i.toString() ;
+	    newCase.style.gridColumn = j.toString() ;
 	    newCase.classList.add("button_case") ;
 	    newCase.id = i.toString() + "_" + j.toString() ;
 	    newCase.style.background="url('case_vide.png')" ;
@@ -142,3 +185,5 @@ function grilleButtons(haut, larg) {
     }    
     
 }
+
+grilleButtons(7,7) ;

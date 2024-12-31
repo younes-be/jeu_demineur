@@ -88,32 +88,35 @@ async function reset(){
 
 }
 
-function Cookies() {
-	var accept = confirm("Tu veux des cookies ?");
-	if (accept === true) {
-	alert("Bon jeu!");
-	} else {
-	Cookies();
-	}
-	}
-//Cookies();
 
 
 
 
+// Fonction pour créer un cookie
+function setCookie(name, value, days) {
+    const expires = new Date(Date.now() + days * 864e5).toUTCString();
+    document.cookie = `${name}=${value}; expires=${expires}; path=/`;
+}
+
+// Fonction pour lire un cookie
+function getCookie(name) {
+    return document.cookie.split('; ').find(row => row.startsWith(name + '='))?.split('=')[1];
+}
 
 
 function cookie(){
 	const popup = document.getElementById('popup');
-	const closePopupButton = document.getElementById('accept-button');
-	
+	const close_popup_button = document.getElementById('accept-button');
+	const keep_popup_button = document.getElementById('refuse-button');
 	// Fonction pour afficher la pop-up
-	
 	popup.classList.add('show');
-	
+
+	keep_popup_button.addEventListener('click', () => {
+		keep_popup_button.style.display = 'none';
+	});
 	
 	// Fonction pour fermer la pop-up
-	closePopupButton.addEventListener('click', () => {
+	close_popup_button.addEventListener('click', () => {
 		setCookie('cookiesAccepted', 'true', 1); // Stocke l'acceptation pendant 1 jour
 		popup.classList.remove('show');
 	});
@@ -186,4 +189,5 @@ function grilleButtons(haut, larg) {
     
 }
 
-grilleButtons(7,7) ;
+creerGrille(hauteur,largeur,number_mines) ;
+grilleButtons(hauteur,largeur) ;

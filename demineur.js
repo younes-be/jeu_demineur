@@ -30,7 +30,7 @@ document.getElementById("fin_game").addEventListener("click", resetJeu) ;
 
 
 
-function getRandomInt(maxi) { //fonction pour obtenir un entier aléatoire entre 0 et maxi
+function entierRandom(maxi) { //fonction pour obtenir un entier aléatoire entre 0 et maxi
     return Math.floor(Math.random() * maxi);
 }
 
@@ -76,12 +76,12 @@ function creerGrille(haut, larg, mine_nb, x_premier, y_premier) {
     }
 
     for (var k = 0; k < mine_nb; k++) {
-        let nouv_x = getRandomInt(larg);
-        let nouv_y = getRandomInt(haut);
+        let nouv_x = entierRandom(larg);
+        let nouv_y = entierRandom(haut);
 
         while (grille[nouv_y][nouv_x] == 9 || (nouv_y == y_premier && nouv_x == x_premier)) {
-            nouv_x = getRandomInt(larg);
-            nouv_y = getRandomInt(haut);
+            nouv_x = entierRandom(larg);
+            nouv_y = entierRandom(haut);
         }
 
         grille[nouv_y][nouv_x] = 9;

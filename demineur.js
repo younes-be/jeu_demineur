@@ -164,6 +164,7 @@ function selectImage(idCase) {
     if (first_click) {
 	creerGrille(hauteur,largeur,number_mines,x,y) ;
 	first_click = false ;
+	chrono() ;
     }
 
     if (grille[y][x] == 0) {

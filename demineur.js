@@ -6,21 +6,43 @@ let first_click = true ;
 let arret=0;
 let cases_restantes = hauteur*largeur - number_mines ;
 
-document.getElementById('options-button').addEventListener('click', () => {
-    document.getElementById('options-popup').classList.add('show');
-});
+function gererOptions() {
+    const newHauteur = parseInt(document.getElementById('hauteur').value);
+    const newLargeur = parseInt(document.getElementById('largeur').value);
+    const newNumberMines = parseInt(document.getElementById('number_mines').value);
 
-document.getElementById('close-options').addEventListener('click', () => {
-    document.getElementById('options-popup').classList.remove('show');
-});
+    if (newHauteur > 12 || newLargeur > 12) {
+        alert("Les dimensions ne doivent pas dépasser 12x12.");
+        return;
+    }
 
-document.getElementById('save-options').addEventListener('click', () => {
-    hauteur = parseInt(document.getElementById('hauteur').value);
-    largeur = parseInt(document.getElementById('largeur').value);
-    number_mines = parseInt(document.getElementById('number_mines').value);
+    const maxMines = newHauteur * newLargeur - 1;
+    if (newNumberMines < 1 || newNumberMines > maxMines) {
+        alert(`Le nombre de mines doit être entre 1 et ${maxMines}.`);
+        return;
+    }
+
+    hauteur = newHauteur;
+    largeur = newLargeur;
+    number_mines = newNumberMines;
     document.getElementById('options-popup').classList.remove('show');
     resetJeu();
-});
+}
+
+function options() {
+    document.getElementById("options-popup").classList.add("show");
+
+    document.getElementById('close-options').addEventListener('click', () => {
+        document.getElementById('options-popup').classList.remove('show');
+    });
+
+    // Ajout de l'écouteur d'événement
+    document.getElementById('save-options').addEventListener('click', gererOptions);
+}
+
+// Exemple de suppression de l'écouteur d'événement
+document.getElementById('save-options').removeEventListener('click', gererOptions);
+
 
 document.getElementById("fin_game").addEventListener("click", resetJeu) ;
 
@@ -119,11 +141,7 @@ async function chrono(){
     }
 
 }
-async function reset(){
-	
-    document.getElementById("temps").value=0;
 
-}
 
 
 
@@ -223,6 +241,9 @@ function resetJeu() {
     cases_restantes = hauteur*largeur - number_mines ;
     arret = 1 ;
     first_click = true ;
+	
+    document.getElementById("temps").value=0;
+    
     
 }
 

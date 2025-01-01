@@ -18,7 +18,37 @@ let number_mines = 10 ;
 let first_click = true ;
 
 
+function jeuFini() {
+    for (let i = 0; i < hauteur; i++) {
+        for (let j = 0; j < largeur; j++) {
+            const caseElement = document.getElementById(i + "_" + j);
+            const caseData = grille[i][j];
 
+            if (caseData === 9) { // Case contenant une mine
+                if (!caseElement.classList.contains("buttonFlagged")) {
+                    return false; // Une mine n'est pas marquée
+                }
+            } else { // Case ne contenant pas de mine
+                if (!caseElement.classList.contains("buttonRevealed")) {
+                    return false; // Une case non-mine n'est pas révélée
+                }
+            }
+        }
+    }
+    return true; // Toutes les conditions sont remplies
+}
+
+function MontrerMines() {
+    for (let i = 0; i < hauteur; i++) {
+        for (let j = 0; j < largeur; j++) {
+            if (grille[i][j] === 9) {
+                const mineCase = document.getElementById(i + "_" + j);
+                mineCase.style.background = "url('case_9.png')";
+                mineCase.classList.add("buttonRevealed");
+            }
+        }
+    }
+}
 
 function creerGrille(haut, larg, mine_nb, x_first, y_first) {
     grille.length = haut;
@@ -156,7 +186,18 @@ function changeImage(targetCase) {
     if (!(targetCase.classList.contains("buttonFlagged"))) {
 	targetCase.classList.add("buttonRevealed") ;
 	targetCase.style.background= selectImage(targetCase.id) ;
+    const coords = targetCase.id.split("_");
+    const y = parseInt(coords[0]);
+    const x = parseInt(coords[1]);
+
+    if (grille[y][x] === 9) {
+        alert("Vous avez perdu !");
+        MontrerMines();
+    } else if (jeuFini()) {
+        alert("Félicitations ! Vous avez gagné !");
     }
+    }
+                                         
 }
 
 

@@ -28,8 +28,8 @@
         Mines restantes:10
     </div>
     <div class="item_nav">
-        <button id="options-button">Options</button>
-    </div>
+            <button id="options-button" onclick="options()">Options</button>
+        </div>
     </nav>   
 
 
@@ -39,10 +39,10 @@
       
     </div>
     <!-- <button id="debut_game" class="game_button" onclick="chrono()">GO!</button>-->
-    <button id="fin_game" class="game_button" onclick="reset()">RESET</button>
+    <button id="fin_game" class="game_button" onclick="resetJeu()">Abandon</button>
 
 <div id="cookies-popup" class="popup">
-    <div class="popup-content">
+    <div id="cookies-popup-content">
         <h2>Bonjour !</h2>
         <p>Voulez vous des cookies?</p>
         
@@ -52,14 +52,21 @@
 </div>
 
 <div id="options-popup" class="popup">
-    <div class="popup-content">
+    <div id="options-popup-content">
         <h2>Options</h2>
         <label for="hauteur">Hauteur:</label>
         <input type="number" id="hauteur" value="7">
+        <br>
         <label for="largeur">Largeur:</label>
         <input type="number" id="largeur" value="7">
+
         <label for="nombre_mines">Nombre de mines:</label>
         <input type="number" id="nombre_mines" value="10">
+        <br>
+        <label for="nombre_mines">Nombre de mines:</label>
+        <input type="number" id="nombre_mines" value="10">
+        <br><br>
+	
         <button id="save-options">Sauvegarder</button>
         <button id="close-options">Fermer</button>
     </div>

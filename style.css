@@ -18,13 +18,18 @@
 }
 
 #jeu{
-	
     display: flex;
-    justify-content: left;
+    justify-content: center;
+    align-items: center;
     border-width: 2px;
-    border-style: double; 
-    width: 49%;
+    border-style: double;
+    width: 50%;
+    max-width: 600px;
     background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 13px 12px 20px 18px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    margin: 50px auto auto ;
 
 }
 #grille {
@@ -60,13 +65,13 @@
     transition: visibility 0.3s, opacity 0.3s;
 }
 
-#cookies-popup.show,#options-popup.show {
+.popup.show{
     visibility: visible;
     opacity: 1;
 }
 
 
-.popup-content {
+#cookies-popup-content {
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;
@@ -75,7 +80,15 @@
     max-width: 400px;
     width: 100%;
 }
-
+#options-popup-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 100%;
+}
 #accept-button, #refuse-button, #save-options, #close-options {
     background-color: #007BFF;
     color: #fff;

@@ -22,6 +22,8 @@ document.getElementById('save-options').addEventListener('click', () => {
     resetJeu();
 });
 
+document.getElementById("fin_game").addEventListener("click", resetJeu) ;
+
 
 function getRandomInt(maxi) {
     return Math.floor(Math.random() * maxi);
@@ -213,14 +215,15 @@ function changeImage(targetCase) {
 }
 
 
-function resetJeu(mouseEvent) {
+function resetJeu() {
+    
     const divJeu = document.getElementById("jeu") ;
     divJeu.removeChild(divJeu.children[0]) ;
-    mouseEvent.target.removeEventListener("click",resetJeu) ;
     grilleButtons(hauteur, largeur) ;
     cases_restantes = hauteur*largeur - number_mines ;
     arret = 1 ;
     first_click = true ;
+    
 }
 
 
@@ -257,9 +260,6 @@ function grilleButtons(haut, larg) {
     divGrille.style.gridTemplateColumns = taille_cols ;
     divGrille.style.gridTemplateRows = taille_rows ;
     divJeu.appendChild(divGrille) ;
-
-    const myButton = document.getElementById("fin_game");
-    myButton.addEventListener("click", resetJeu) ;
 
     for (var i=0;i<haut;i++) {
 	for (var j=0;j<larg;j++){

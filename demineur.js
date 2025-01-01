@@ -13,7 +13,7 @@ class Case_grille {
 
 let grille = [];
 let hauteur = 7;
-let largeur = 14;
+let largeur = 7;
 let number_mines = 10 ;
 let first_click = true ;
 
@@ -134,6 +134,7 @@ function selectImage(idCase) {
     if (first_click) {
 	creerGrille(hauteur,largeur,number_mines,x,y) ;
 	first_click = false ;
+	chrono() ;
     }
 
     if (grille[y][x] == 0) {

@@ -1,20 +1,25 @@
+//Initialisation des constantes
+
 let grille = [];
 let hauteur = 7;
 let largeur = 7;
-let number_mines = 10 ;
-let first_click = true ;
+let nombre_mines = 10 ;
+let premier_click = true ;
 let arret=0;
-let cases_restantes = hauteur*largeur - number_mines ;
+let cases_restantes = hauteur*largeur - nombre_mines ;
+
+//Assignation de leurs fonctions aux différents boutons
 
 function gererOptions() {
     const newHauteur = parseInt(document.getElementById('hauteur').value);
     const newLargeur = parseInt(document.getElementById('largeur').value);
-    const newNumberMines = parseInt(document.getElementById('number_mines').value);
+    const newNumberMines = parseInt(document.getElementById('nombre_mines').value);
 
     if (newHauteur > 12 || newLargeur > 12) {
         alert("Les dimensions ne doivent pas dépasser 12x12.");
         return;
     }
+
 
     const maxMines = newHauteur * newLargeur - 1;
     if (newNumberMines < 1 || newNumberMines > maxMines) {
@@ -24,7 +29,8 @@ function gererOptions() {
 
     hauteur = newHauteur;
     largeur = newLargeur;
-    number_mines = newNumberMines;
+    nombre_mines = newNumberMines;
+
     document.getElementById('options-popup').classList.remove('show');
     resetJeu();
 }
@@ -47,7 +53,8 @@ document.getElementById('save-options').removeEventListener('click', gererOption
 document.getElementById("fin_game").addEventListener("click", resetJeu) ;
 
 
-function getRandomInt(maxi) {
+
+function entierRandom(maxi) { //fonction pour obtenir un entier aléatoire entre 0 et maxi
     return Math.floor(Math.random() * maxi);
 }
 
@@ -71,7 +78,7 @@ function jeuFini() {
     return true; // Toutes les conditions sont remplies
 }
 
-function MontrerMines() {
+function MontrerMines() { //fonction pour révéler toutes les mines sur le plateau après un essai raté
     for (let i = 0; i < hauteur; i++) {
         for (let j = 0; j < largeur; j++) {
             if (grille[i][j] === 9) {
@@ -83,7 +90,7 @@ function MontrerMines() {
     }
 }
 
-function creerGrille(haut, larg, mine_nb, x_first, y_first) {
+function creerGrille(haut, larg, mine_nb, x_premier, y_premier) {
     grille.length = haut;
     for (var i = 0; i < haut; i++) {
         grille[i] = Array(larg);
@@ -93,17 +100,17 @@ function creerGrille(haut, larg, mine_nb, x_first, y_first) {
     }
 
     for (var k = 0; k < mine_nb; k++) {
-        let new_x = getRandomInt(larg);
-        let new_y = getRandomInt(haut);
+        let nouv_x = entierRandom(larg);
+        let nouv_y = entierRandom(haut);
 
-        while (grille[new_y][new_x] == 9 || (new_y == y_first && new_x == x_first)) {
-            new_x = getRandomInt(larg);
-            new_y = getRandomInt(haut);
+        while (grille[nouv_y][nouv_x] == 9 || (nouv_y == y_premier && nouv_x == x_premier)) {
+            nouv_x = entierRandom(larg);
+            nouv_y = entierRandom(haut);
         }
 
-        grille[new_y][new_x] = 9;
-        for (var m = Math.max(0, new_y - 1); m < Math.min(haut, new_y + 2); m++) {
-            for (var n = Math.max(0, new_x - 1); n < Math.min(larg, new_x + 2); n++) {
+        grille[nouv_y][nouv_x] = 9;
+        for (var m = Math.max(0, nouv_y - 1); m < Math.min(haut, nouv_y + 2); m++) {
+            for (var n = Math.max(0, nouv_x - 1); n < Math.min(larg, nouv_x + 2); n++) {
                 if (grille[m][n] != 9) {
                     grille[m][n]++;
                 }
@@ -190,9 +197,9 @@ function selectImage(idCase) {
     const y = parseInt(coords[0]) ;
     const x = parseInt(coords[1]) ;
 
-    if (first_click) {
-	creerGrille(hauteur,largeur,number_mines,x,y) ;
-	first_click = false ;
+    if (premier_click) {
+	creerGrille(hauteur,largeur,nombre_mines,x,y) ;
+	premier_click = false ;
 	chrono() ;
     }
 
@@ -238,13 +245,11 @@ function resetJeu() {
     const divJeu = document.getElementById("jeu") ;
     divJeu.removeChild(divJeu.children[0]) ;
     grilleButtons(hauteur, largeur) ;
-    cases_restantes = hauteur*largeur - number_mines ;
+    cases_restantes = hauteur*largeur - nombre_mines ;
     arret = 1 ;
-    first_click = true ;
-	
-    document.getElementById("temps").value=0;
-    
-    
+    premier_click = true ;	
+    document.getElementById("temps").value=0;   
+   
 }
 
 
@@ -284,15 +289,15 @@ function grilleButtons(haut, larg) {
 
     for (var i=0;i<haut;i++) {
 	for (var j=0;j<larg;j++){
-	    var newCase = document.createElement("BUTTON") ;
-	    newCase.style.gridRow=(i+1).toString() ;
-	    newCase.style.gridColumn = (j+1).toString() ;
-	    newCase.classList.add("button_case") ;
-	    newCase.id = i.toString() + "_" + j.toString() ;
-	    newCase.style.background="url('case_vide.png')" ;
-	    newCase.addEventListener("click", changeImageClick);
-	    newCase.addEventListener("contextmenu", changeImageFlag);
-	    divGrille.appendChild(newCase) ;
+	    var nouvCase = document.createElement("BUTTON") ;
+	    nouvCase.style.gridRow=(i+1).toString() ;
+	    nouvCase.style.gridColumn = (j+1).toString() ;
+	    nouvCase.classList.add("button_case") ;
+	    nouvCase.id = i.toString() + "_" + j.toString() ;
+	    nouvCase.style.background="url('case_vide.png')" ;
+	    nouvCase.addEventListener("click", changeImageClick);
+	    nouvCase.addEventListener("contextmenu", changeImageFlag);
+	    divGrille.appendChild(nouvCase) ;
 	    
 	}
     }        

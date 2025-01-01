@@ -10,9 +10,8 @@ body {
     align-items: center;
     height: 100vh;
     text-align: center;
+    overflow:hidden;
 }
-
-
 
 
 .container {
@@ -39,12 +38,13 @@ header h1 {
 
 .welcome-image {
     width: 80%;
-    max-width: 400px;
+    max-width: 70px;
     margin: 20px auto;
     display: block;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
 
 
 button {
@@ -55,11 +55,16 @@ button {
     background-color: #007BFF;
     border: none;
     border-radius: 8px;
+    text-transform: uppercase;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
+    /*transition: background-color 0.3s, transform 0.2s;*/
+
+    
 }
-    transform: scale(1.05);
-}
+button:hover {
+    background-color: #d3e017; 
+    transform: scale(1.1);
+} 
 
 
 footer {

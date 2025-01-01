@@ -160,6 +160,14 @@ function changeImage(targetCase) {
 }
 
 
+function resetJeu(mouseEvent) {
+    const divJeu = document.getElementById("jeu") ;
+    divJeu.removeChild(divJeu.children[0]) ;
+    mouseEvent.target.removeEventListener("click",resetJeu) ;
+    grilleButtons(hauteur, largeur) ;
+}
+
+
 function changeImageClick(mouseEvent) {
     changeImage(mouseEvent.target) ;
 }
@@ -191,6 +199,9 @@ function grilleButtons(haut, larg) {
     divGrille.style.gridTemplateColumns = taille_cols ;
     divGrille.style.gridTemplateRows = taille_rows ;
     divJeu.appendChild(divGrille) ;
+
+    const myButton = document.getElementById("fin_game");
+    myButton.addEventListener("click", resetJeu) ;
 
     for (var i=0;i<haut;i++) {
 	for (var j=0;j<larg;j++){

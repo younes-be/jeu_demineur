@@ -1,21 +1,10 @@
-class Case_grille {
-    constructor(x, y) {
-	this.posX = x;
-	this.posY = y;
-	this.isMine = false;
-	this.number = 0;
-	this.hidden = true;
-    }
-
-}
-
-
-
 let grille = [];
 let hauteur = 7;
 let largeur = 7;
 let number_mines = 10 ;
 let first_click = true ;
+let arret=0;
+let cases_restantes = hauteur*largeur - number_mines ;
 
 
 function getRandomInt(maxi) {
@@ -99,22 +88,22 @@ function sleep(ms){
 	return new Promise(resolve => setTimeout(resolve, ms));
 }
 async function chrono(){
-	let k=document.getElementById("temps").value;
-	const myButton = document.getElementById("fin_game");
-	let arret=0;
-	myButton.addEventListener("click",() =>{arret=1;})
-	
-	while(arret==!1) {
+    let k=document.getElementById("temps").value;
+    const myButton = document.getElementById("fin_game");
+    arret = 0 ;
+    
+    while(arret==!1) {
 	await sleep(1000);
 	if (arret==!1){
-	document.getElementById("temps").value=document.getElementById("temps").value*1+1;
+	    document.getElementById("temps").value=document.getElementById("temps").value*1+1;
 	
-}
-}
+	}
+    }
+
 }
 async function reset(){
 	
-	document.getElementById("temps").value=0;
+    document.getElementById("temps").value=0;
 
 }
 
@@ -171,6 +160,12 @@ function selectImage(idCase) {
 	chrono() ;
     }
 
+    if (grille[y][x] === 9 && arret == 0) {
+	arret = 1;
+        alert("Vous avez perdu !");
+        MontrerMines();
+    }
+    
     if (grille[y][x] == 0) {
 	for (var m = Math.max(0, y - 1); m < Math.min(hauteur, y + 2); m++) {
             for (var n = Math.max(0, x - 1); n < Math.min(largeur, x + 2); n++) {
@@ -190,18 +185,15 @@ function changeImage(targetCase) {
     if (!(targetCase.classList.contains("buttonFlagged"))) {
 	targetCase.classList.add("buttonRevealed") ;
 	targetCase.style.background= selectImage(targetCase.id) ;
-    const coords = targetCase.id.split("_");
-    const y = parseInt(coords[0]);
-    const x = parseInt(coords[1]);
 
-    if (grille[y][x] === 9) {
-        alert("Vous avez perdu !");
-        MontrerMines();
-    } else if (jeuFini()) {
-        alert("Félicitations ! Vous avez gagné !");
+	cases_restantes = cases_restantes - 1 ;
+
+	if (cases_restantes == 0 && arret == 0) {
+	    arret = 1 ;
+            alert("Félicitations ! Vous avez gagné !");
+	}
     }
-    }
-                                         
+    
 }
 
 
@@ -210,6 +202,8 @@ function resetJeu(mouseEvent) {
     divJeu.removeChild(divJeu.children[0]) ;
     mouseEvent.target.removeEventListener("click",resetJeu) ;
     grilleButtons(hauteur, largeur) ;
+    cases_restantes = hauteur*largeur - number_mines ;
+    arret = 1 ;
     first_click = true ;
 }
 

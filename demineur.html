@@ -21,14 +21,11 @@
     
     <div class="item_nav">    
     Temps:
-    <input id="temps" type="number" value="000" disabled>
+    <input id="temps" type="number" value="0" disabled>
     </div> 
 
-<div class="item_nav">  
-        Mines restantes:10
-    </div>
     <div class="item_nav">
-            <button id="options-button" onclick="options()">Options</button>
+            <a id="options-button" href="#" onclick="options()">Options</a>
         </div>
     </nav>   
 
@@ -39,7 +36,7 @@
       
     </div>
     <!-- <button id="debut_game" class="game_button" onclick="chrono()">GO!</button>-->
-    <button id="fin_game" class="game_button" onclick="resetJeu()">Abandon</button>
+    <button id="fin_game" onclick="resetJeu()">Abandon</button>
 
 <div id="cookies-popup" class="popup">
     <div id="cookies-popup-content">

@@ -19,15 +19,10 @@ document.getElementById('save-options').addEventListener('click', () => {
     largeur = parseInt(document.getElementById('largeur').value);
     number_mines = parseInt(document.getElementById('number_mines').value);
     document.getElementById('options-popup').classList.remove('show');
-    resetGame();
+    resetJeu();
 });
 
-function resetGame() {
-    first_click = true;
-    document.getElementById('jeu').innerHTML = '';
-    creerGrille(hauteur, largeur, number_mines);
-    grilleButtons(hauteur, largeur);
-}
+
 function getRandomInt(maxi) {
     return Math.floor(Math.random() * maxi);
 }

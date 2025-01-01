@@ -60,10 +60,11 @@
     transition: visibility 0.3s, opacity 0.3s;
 }
 
-.popup.show {
+#cookies-popup.show,#options-popup.show {
     visibility: visible;
     opacity: 1;
 }
+
 
 .popup-content {
     background-color: #fff;
@@ -75,7 +76,7 @@
     width: 100%;
 }
 
-#accept-button, #refuse-button {
+#accept-button, #refuse-button, #save-options, #close-options {
     background-color: #007BFF;
     color: #fff;
     border: none;
@@ -88,7 +89,7 @@
     background-color: #0056b3;
 }
 
-#refuse-button:hover,#accept-button:hover {
+#refuse-button:hover,#accept-button:hover, #save-options:hover, #close-options:hover  {
     background-color: #1ecfee;
     
 }

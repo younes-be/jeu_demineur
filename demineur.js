@@ -17,7 +17,28 @@ let largeur = 7;
 let number_mines = 10 ;
 let first_click = true ;
 
+document.getElementById('options-button').addEventListener('click', () => {
+    document.getElementById('options-popup').classList.add('show');
+});
 
+document.getElementById('close-options').addEventListener('click', () => {
+    document.getElementById('options-popup').classList.remove('show');
+});
+
+document.getElementById('save-options').addEventListener('click', () => {
+    hauteur = parseInt(document.getElementById('hauteur').value);
+    largeur = parseInt(document.getElementById('largeur').value);
+    number_mines = parseInt(document.getElementById('number_mines').value);
+    document.getElementById('options-popup').classList.remove('show');
+    resetGame();
+});
+
+function resetGame() {
+    first_click = true;
+    document.getElementById('jeu').innerHTML = '';
+    creerGrille(hauteur, largeur, number_mines);
+    grilleButtons(hauteur, largeur);
+}
 function jeuFini() {
     for (let i = 0; i < hauteur; i++) {
         for (let j = 0; j < largeur; j++) {
@@ -131,7 +152,7 @@ function getCookie(name) {
 
 
 function cookie(){
-	const popup = document.getElementById('popup');
+	const popup = document.getElementById('cookies-popup');
 	const close_popup_button = document.getElementById('accept-button');
 	const keep_popup_button = document.getElementById('refuse-button');
 	// Fonction pour afficher la pop-up

@@ -204,8 +204,9 @@ function selectImage(idCase) {
     }
 
     if (grille[y][x] === 9 && arret == 0) {
-	arret = 1;
-        alert("Vous avez perdu !");
+	    arret = 1;
+        const time = document.getElementById("temps").value;
+        alert(`Vous avez perdu ! Temps passé : ${time} secondes.`);
         MontrerMines();
     }
     
@@ -233,7 +234,8 @@ function changeImage(targetCase) {
 
 	if (cases_restantes == 0 && arret == 0) {
 	    arret = 1 ;
-            alert("Félicitations ! Vous avez gagné !");
+        const time = document.getElementById("temps").value;
+        alert(`Félicitations ! Vous avez gagné ! Temps passé : ${time} secondes.`);
 	}
     }
     

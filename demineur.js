@@ -13,14 +13,14 @@ class Case_grille {
 
 let grille = [];
 let hauteur = 7;
-let largeur = 7;
+let largeur = 14;
 let number_mines = 10 ;
+let first_click = true ;
 
 
 
 
-
-function creerGrille(haut, larg, mine_nb) {
+function creerGrille(haut, larg, mine_nb, x_first, y_first) {
     grille.length = haut;
     for (var i = 0; i < haut; i++) {
         grille[i] = Array(larg);
@@ -33,7 +33,7 @@ function creerGrille(haut, larg, mine_nb) {
         let new_x = Math.floor(Math.random() * larg);
         let new_y = Math.floor(Math.random() * haut);
 
-        while (grille[new_y][new_x] == 9) {
+        while (grille[new_y][new_x] == 9 || (new_y == y_first && new_x == x_first)) {
             new_x = Math.floor(Math.random() * larg);
             new_y = Math.floor(Math.random() * haut);
         }
@@ -128,16 +128,39 @@ if (!cookieAccepted){
 
 function selectImage(idCase) {
     const coords = idCase.split("_") ;
-    const x = parseInt(coords[0]) ;
-    const y = parseInt(coords[1]) ;
-    return("url('case_" + grille[x][y].toString() + ".png')");
+    const y = parseInt(coords[0]) ;
+    const x = parseInt(coords[1]) ;
+
+    if (first_click) {
+	creerGrille(hauteur,largeur,number_mines,x,y) ;
+	first_click = false ;
+    }
+
+    if (grille[y][x] == 0) {
+	for (var m = Math.max(0, y - 1); m < Math.min(hauteur, y + 2); m++) {
+            for (var n = Math.max(0, x - 1); n < Math.min(largeur, x + 2); n++) {
+		const currentCase = document.getElementById(m.toString() + "_" + n.toString()) ;
+                if (!(currentCase.classList.contains("buttonRevealed"))) {
+                    changeImage(currentCase) ;
+                }
+            }
+        }
+    }
+    
+    return("url('case_" + grille[y][x].toString() + ".png')");
 }
 
-function changeImage(mouseEvent) {
-    if (!(mouseEvent.target.classList.contains("buttonFlagged"))) {
-	mouseEvent.target.style.background= selectImage(mouseEvent.target.id) ;
-	mouseEvent.target.classList.add("buttonRevealed") ;
+
+function changeImage(targetCase) {
+    if (!(targetCase.classList.contains("buttonFlagged"))) {
+	targetCase.classList.add("buttonRevealed") ;
+	targetCase.style.background= selectImage(targetCase.id) ;
     }
+}
+
+
+function changeImageClick(mouseEvent) {
+    changeImage(mouseEvent.target) ;
 }
 
 
@@ -176,7 +199,7 @@ function grilleButtons(haut, larg) {
 	    newCase.classList.add("button_case") ;
 	    newCase.id = i.toString() + "_" + j.toString() ;
 	    newCase.style.background="url('case_vide.png')" ;
-	    newCase.addEventListener("click", changeImage);
+	    newCase.addEventListener("click", changeImageClick);
 	    newCase.addEventListener("contextmenu", changeImageFlag);
 	    divGrille.appendChild(newCase) ;
 	    
@@ -185,5 +208,4 @@ function grilleButtons(haut, larg) {
     
 }
 
-creerGrille(hauteur,largeur,number_mines) ;
 grilleButtons(hauteur,largeur) ;

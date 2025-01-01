@@ -39,6 +39,10 @@ function resetGame() {
     creerGrille(hauteur, largeur, number_mines);
     grilleButtons(hauteur, largeur);
 }
+function getRandomInt(maxi) {
+    return Math.floor(Math.random() * maxi);
+}
+
 function jeuFini() {
     for (let i = 0; i < hauteur; i++) {
         for (let j = 0; j < largeur; j++) {
@@ -81,12 +85,12 @@ function creerGrille(haut, larg, mine_nb, x_first, y_first) {
     }
 
     for (var k = 0; k < mine_nb; k++) {
-        let new_x = Math.floor(Math.random() * larg);
-        let new_y = Math.floor(Math.random() * haut);
+        let new_x = getRandomInt(larg);
+        let new_y = getRandomInt(haut);
 
         while (grille[new_y][new_x] == 9 || (new_y == y_first && new_x == x_first)) {
-            new_x = Math.floor(Math.random() * larg);
-            new_y = Math.floor(Math.random() * haut);
+            new_x = getRandomInt(larg);
+            new_y = getRandomInt(haut);
         }
 
         grille[new_y][new_x] = 9;
@@ -222,8 +226,19 @@ function changeImage(targetCase) {
 }
 
 
+function resetJeu(mouseEvent) {
+    const divJeu = document.getElementById("jeu") ;
+    divJeu.removeChild(divJeu.children[0]) ;
+    mouseEvent.target.removeEventListener("click",resetJeu) ;
+    grilleButtons(hauteur, largeur) ;
+    first_click = true ;
+}
+
+
 function changeImageClick(mouseEvent) {
-    changeImage(mouseEvent.target) ;
+    if (!(mouseEvent.target.classList.contains("buttonRevealed"))) {
+	changeImage(mouseEvent.target) ;
+    }
 }
 
 
@@ -254,6 +269,9 @@ function grilleButtons(haut, larg) {
     divGrille.style.gridTemplateRows = taille_rows ;
     divJeu.appendChild(divGrille) ;
 
+    const myButton = document.getElementById("fin_game");
+    myButton.addEventListener("click", resetJeu) ;
+
     for (var i=0;i<haut;i++) {
 	for (var j=0;j<larg;j++){
 	    var newCase = document.createElement("BUTTON") ;
@@ -267,8 +285,7 @@ function grilleButtons(haut, larg) {
 	    divGrille.appendChild(newCase) ;
 	    
 	}
-    }    
-    
+    }        
 }
 
 grilleButtons(hauteur,largeur) ;

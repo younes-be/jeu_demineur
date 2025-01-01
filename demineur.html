@@ -27,20 +27,22 @@
 <div class="item_nav">  
         Mines restantes:10
     </div>
+    <div class="item_nav">
+            <button id="options-button" onclick="options()">Options</button>
+        </div>
     </nav>   
 
 
     <div id="jeu">
-      <button id="debut_game" onclick="chrono()">GO!</button>
-      <button id="fin_game" onclick="reset()">CIAO</button>
-      <div id="grille">
-	<script type="text/javascript">grilleButtons(7,7);</script>
-      </div>
+      
+
+      
     </div>
+    <!-- <button id="debut_game" class="game_button" onclick="chrono()">GO!</button>-->
+    <button id="fin_game" class="game_button" onclick="resetJeu()">Abandon</button>
 
-
-<div id="popup" class="popup">
-    <div class="popup-content">
+<div id="cookies-popup" class="popup">
+    <div id="cookies-popup-content">
         <h2>Bonjour !</h2>
         <p>Voulez vous des cookies?</p>
         
@@ -48,5 +50,25 @@
         <button id="accept-button">Avec Plaisir!</button>
     </div>
 </div>
+
+<div id="options-popup" class="popup">
+    <div id="options-popup-content">
+        <h2>Options</h2>
+        <label for="hauteur">Hauteur:</label>
+        <input type="number" id="hauteur" value="7">
+        <br>
+        <label for="largeur">Largeur:</label>
+        <input type="number" id="largeur" value="7">
+        <br>
+        <label for="number_mines">Nombre de mines:</label>
+        <input type="number" id="number_mines" value="10">
+        <br><br>
+        <button id="save-options">Sauvegarder</button>
+        <button id="close-options">Fermer</button>
+    </div>
+</div>
 </body>
+<footer>
+    <p>© 2024 - Tous droits réservés - Le Démineur</p>
+</footer>
 </html>

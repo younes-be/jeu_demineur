@@ -11,34 +11,44 @@
 }
 
 #body_demineur{
-	background-color: rgba(128, 128, 128, 0.544);
+	background-color: #007BFF;
 	
 	margin: 0;
 	
 }
 
 #jeu{
-	
-	display: flex;
-    justify-content: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-width: 2px;
-	border-style: double; 
-	width: 49%;
+    border-style: double;
+    width: 50%;
+    max-width: 600px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 13px 12px 20px 18px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    margin: 50px auto auto ;
+
+}
+#grille {
+    display: grid;
+    gap: 1px; /* Ajout d'un écart entre les cases pour une meilleure visibilité */
+}
+.button_case{
+    width : 50px;
+    height : 50px;
+    border : 0px;
 
 }
 
-#grille{
-    display : grid;
-    grid-template-columns : 50px 50px 50px 50px 50px 50px 50px;
-    grid-template-rows : 50px 50px 50px 50px 50px 50px 50px;
-}
 
 .item_nav{
 	margin-top: 3px;
 	padding-right: 10px;
 }
 
-<<<<<<< HEAD
 .popup {
     position: fixed;
     top: 0;
@@ -55,12 +65,13 @@
     transition: visibility 0.3s, opacity 0.3s;
 }
 
-.popup.show {
+.popup.show{
     visibility: visible;
     opacity: 1;
 }
 
-.popup-content {
+
+#cookies-popup-content {
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;
@@ -69,16 +80,16 @@
     max-width: 400px;
     width: 100%;
 }
-
-#accept-button {
-    background-color: #007BFF;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
+#options-popup-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 100%;
 }
-#refuse-button {
+#accept-button, #refuse-button, #save-options, #close-options {
     background-color: #007BFF;
     color: #fff;
     border: none;
@@ -89,10 +100,10 @@
 
 #close-popup:hover {
     background-color: #0056b3;
-=======
-.button_case{
-    width : 50px;
-    height : 50px;
-    border : 0px;
->>>>>>> 2a2cf84cf311b49f5c290c8502b43f35efa7ec30
 }
+
+#refuse-button:hover,#accept-button:hover, #save-options:hover, #close-options:hover  {
+    background-color: #1ecfee;
+    
+}
+

@@ -48,9 +48,6 @@ function options() {
     document.getElementById('save-options').addEventListener('click', gererOptions);
 }
 
-// Exemple de suppression de l'écouteur d'événement
-document.getElementById('save-options').removeEventListener('click', gererOptions);
-
 
 
 

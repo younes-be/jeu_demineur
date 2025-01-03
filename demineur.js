@@ -62,7 +62,8 @@ function MontrerMines() { //révèle toutes les mines sur le plateau après un e
         for (let j = 0; j < largeur; j++) {
             if (grille[i][j] === 9) {
                 const mineCase = document.getElementById(i + "_" + j);
-                mineCase.style.background = "url('case_9.png')";
+		mineCase.src = "case_9.png";
+		mineCase.alt = "Mine" ;
                 mineCase.classList.add("buttonRevealed");
             }
         }
@@ -183,13 +184,6 @@ function selectImage(idCase) { //détermine l'image à affecter à la case d'id 
 	chrono() ;
     }
 
-    //si la case révélée était une mine, arrête la partie et affiche un message de perte
-    if (grille[y][x] === 9 && arret == 0) {
-	    arret = 1;
-        const time = document.getElementById("temps").value;
-        alert(`Vous avez perdu ! Temps passé : ${time} secondes.`);
-        MontrerMines();
-    }
 
     //si la case révélée n'est adjacente à aucune mine, révèle également les cases adjacentes 
     if (grille[y][x] == 0) {
@@ -203,29 +197,44 @@ function selectImage(idCase) { //détermine l'image à affecter à la case d'id 
         }
     }
 
-    //renvoie le nom de fichier de l'image à afficher dans la case en fonction du contenu de grille à la même position
-    return("url('case_" + grille[y][x].toString() + ".png')");
+    //renvoie le numéro contenu dans grille à la position de la case 
+    return(grille[y][x].toString());
 }
 
 
 function changeImage(caseCible) {
     //Change l'image d'une case caseCible et appelle selectImage sur l'id de cette case.
+    //Si la case révélée était une mine, arrête la partie, affiche toutes les mines et un message de perte
     //Si c'est la dernière case ne contenant pas de mine, arrete la partie et affiche un message de victoire
     
     if (!(caseCible.classList.contains("buttonFlagged"))) {
+	
 	caseCible.classList.add("buttonRevealed") ;
-	caseCible.style.background= selectImage(caseCible.id) ;
+	const nombreCase = selectImage(caseCible.id) ;
+	caseCible.src= "case_" + nombreCase + ".png" ;
 
-	cases_restantes = cases_restantes - 1 ;
+	if (nombreCase == "9") { //test de perte
 
-	//Test de victoire
-	if (cases_restantes == 0 && arret == 0) {
-	    arret = 1 ;
-            const time = document.getElementById("temps").value;
-            alert(`Félicitations ! Vous avez gagné ! Temps passé : ${time} secondes.`);
+	    caseCible.alt = "Mine" ;
+	    if (arret == 0) {
+		arret = 1;
+		const time = document.getElementById("temps").value;
+		alert(`Vous avez perdu ! Temps passé : ${time} secondes.`);
+		MontrerMines();
+	    }
+	} else { //sinon, test de victoire
+	    
+	    caseCible.alt = nombreCase ;
+
+	    cases_restantes = cases_restantes - 1 ;
+
+	    if (cases_restantes == 0 && arret == 0) {
+		arret = 1 ;
+		const time = document.getElementById("temps").value;
+		alert(`Félicitations ! Vous avez gagné ! Temps passé : ${time} secondes.`);
+	    }
 	}
-    }
-    
+    }   
 }
 
 
@@ -245,10 +254,12 @@ function changeImageFlag(rightClick) {
     if (rightClick.target.classList.contains("buttonRevealed")) {
 	return 0 ;
     } else if (rightClick.target.classList.contains("buttonFlagged")) {
-	rightClick.target.style.background="url('case_vide.png')" ;
+	rightClick.target.src="case_vide.png" ;
+	rightClick.target.alt = "Case" ;
 	rightClick.target.classList.remove("buttonFlagged") ;
     } else {
-	rightClick.target.style.background="url('case_flag.png')" ;
+	rightClick.target.src="case_flag.png" ;
+	rightClick.target.alt = "Flag" ;
 	rightClick.target.classList.add("buttonFlagged") ;
     }
 }
@@ -270,7 +281,7 @@ function resetJeu() { //supprime la grille actuelle, arrête la partie, recrée 
 function grilleButtons(haut, larg) {
 
     //crée dans la div jeu une div grille de type grid et de dimensions haut par larg
-    //et y ajoute les boutons représentant les cases du jeu de démineur en les liants aux fonctions adéquates
+    //et y ajoute les images représentant les cases du jeu de démineur en les liants aux fonctions adéquates
     
     const divJeu = document.getElementById("jeu") ;
     var divGrille = document.createElement("DIV") ;
@@ -286,12 +297,13 @@ function grilleButtons(haut, larg) {
     for (var i=0;i<haut;i++) { //ajout des cases
 	for (var j=0;j<larg;j++){
 	    
-	    var nouvCase = document.createElement("BUTTON") ;
+	    var nouvCase = document.createElement("IMG") ;
 	    nouvCase.style.gridRow=(i+1).toString() ;
 	    nouvCase.style.gridColumn = (j+1).toString() ;
 	    nouvCase.classList.add("button_case") ;
 	    nouvCase.id = i.toString() + "_" + j.toString() ;
-	    nouvCase.style.background="url('case_vide.png')" ;
+	    nouvCase.src="case_vide.png" ;
+	    nouvCase.alt = "Case";
 	    nouvCase.addEventListener("click", changeImageClick);
 	    nouvCase.addEventListener("contextmenu", changeImageFlag);
 	    divGrille.appendChild(nouvCase) ;

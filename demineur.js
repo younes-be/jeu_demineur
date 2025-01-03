@@ -33,6 +33,7 @@ function gererOptions() {
     nombre_mines = newNumberMines;
 
     document.getElementById('options-popup').classList.remove('show');
+    document.getElementById("affichage_nombre_mines").innerText = "Nombre total de mines : " + nombre_mines.toString() ;
     resetJeu();
 }
 

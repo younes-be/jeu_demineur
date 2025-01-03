@@ -21,6 +21,7 @@
     transition: background-color 0.7s, color 0.3s;
 }
 
+
 #nav_demineur a:hover {
     background-color: #0039b33b; /* Couleur de fond au survol */
     color: #fff; /* Couleur du texte au survol */

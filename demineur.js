@@ -135,18 +135,40 @@ async function chrono(){ //incrémente de 1 la valeur Temps affichée en haut de
     }
 }
 
-
-
-// Fonction pour créer un cookie
-function setCookie(name, value, days) {
-    const expires = new Date(Date.now() + days * 864e5).toUTCString();
-    document.cookie = `${name}=${value}; expires=${expires}; path=/`;
+// Définir le constructeur Joueur
+function Joueur(prenom, nom) {
+    this.prenom = prenom;
+    this.nom = nom;
 }
 
-// Fonction pour lire un cookie
-function getCookie(name) {
-    return document.cookie.split('; ').find(row => row.startsWith(name + '='))?.split('=')[1];
+// Ajouter une méthode au prototype de Joueur pour afficher les informations
+Joueur.prototype.afficherInfo = function() {
+    return `Joueur: ${this.prenom} ${this.nom}`;
+};
+
+// Vérifier si le cookie est présent
+const cookieAccepted = getCookie('cookiesAccepted');
+
+if (cookieAccepted) {
+    // Demander le prénom et le nom du joueur
+    const prenom = prompt("Veuillez entrer votre prénom:");
+    const nom = prompt("Veuillez entrer votre nom:");
+
+    // Créer une instance de Joueur
+    const joueur = new Joueur(prenom, nom);
+
+    // Afficher les informations du joueur à droite de la div du jeu
+    document.addEventListener("DOMContentLoaded", function() {
+        const infoDiv = document.createElement("div");
+        infoDiv.id = "joueur-info";
+        infoDiv.innerText = joueur.afficherInfo();
+        infoDiv.style.position = "absolute";
+        infoDiv.style.right = "10px";
+        infoDiv.style.top = "10px";
+        document.body.appendChild(infoDiv);
+    });
 }
+
 
  
 function cookie(){ //crée le popup qui questionne l'utilisateur sur son choix de cookie
@@ -313,8 +335,6 @@ function grilleButtons(haut, larg) {
     }        
 }
 
-//Lors de la première visite de la page, vérifie si les cookies ont déjà été acceptés et sinon, demande à l'utilisateur sa préférence
-const cookieAccepted = getCookie('cookiesAccepted');
 
 if (!cookieAccepted){
 	cookie();
